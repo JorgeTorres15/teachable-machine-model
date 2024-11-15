@@ -1,0 +1,21 @@
+{
+  "name": "Reconocimiento de Lenguaje de Señas",
+  "short_name": "Lenguaje de Señas",
+  "description": "Aplicación para reconocer señas del lenguaje de señas mexicano usando Teachable Machine",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#2F3BA2",
+  "theme_color": "#2F3BA2",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
