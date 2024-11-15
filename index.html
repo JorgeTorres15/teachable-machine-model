@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teachable Machine Webcam</title>
+    <title>Teachable Machine Image Model</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
 </head>
@@ -14,9 +14,9 @@
     <div id="label-container"></div>
 
     <script>
-        // The URL for your model (replace with your model's actual URL)
-        const URL = 'https://storage.googleapis.com/tm-models/your-model-url/';
-        
+        // Replace the URL below with the raw URLs for model and metadata files
+        const URL = 'https://raw.githubusercontent.com/JorgeTorres15/teachable-machine-model/refs/heads/main/';
+
         let model, webcam, labelContainer, maxPredictions;
 
         async function init() {
