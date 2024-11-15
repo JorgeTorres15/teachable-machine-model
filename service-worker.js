@@ -8,8 +8,6 @@ self.addEventListener('install', (event) => {
               'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs', // Cargar TensorFlow.js desde CDN
               'https://jorgetorres15.github.io/teachable-machine-model/model.json', // El modelo de Teachable Machine
               'https://jorgetorres15.github.io/teachable-machine-model/group1-shard1of1.bin', // Binarios del modelo
-              '/icons/icon-192x192.png', // Icono de la PWA
-              '/icons/icon-512x512.png'  // Icono de la PWA
           ]);
       })
   );
