@@ -9,17 +9,23 @@
 </head>
 <body>
     <h1>Teachable Machine Image Model</h1>
-    <button type="button" onclick="init()">Start Webcam</button>
+    <button type="button" onclick="initWebcam()">Start Webcam</button>
+    <button type="button" onclick="loadModelFromFiles()">Upload Model</button>
+    
+    <input type="file" id="upload-model" accept=".json" style="display:none" />
+    <input type="file" id="upload-weights" accept=".bin" style="display:none" />
+    <input type="file" id="upload-metadata" accept=".json" style="display:none" />
+    
     <div id="webcam-container"></div>
     <div id="label-container"></div>
 
     <script type="text/javascript">
         let model, webcam, labelContainer, maxPredictions;
 
-        // URL for the model and metadata (already provided by you)
+        // Loading model from URL (existing method)
         const URL = 'https://raw.githubusercontent.com/JorgeTorres15/teachable-machine-model/refs/heads/main/';
 
-        async function init() {
+        async function initWebcam() {
             const modelURL = URL + 'model.json';
             const metadataURL = URL + 'metadata.json';
 
@@ -48,15 +54,16 @@
             }
         }
 
+        // Handle webcam prediction loop
         async function loop() {
             webcam.update(); // Update webcam frame
             await predict();
             window.requestAnimationFrame(loop);
         }
 
+        // Predict using the webcam canvas
         async function predict() {
             try {
-                // Predict the class based on the webcam canvas
                 const prediction = await model.predict(webcam.canvas);
                 for (let i = 0; i < maxPredictions; i++) {
                     const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
@@ -65,6 +72,51 @@
             } catch (err) {
                 console.error("Error during prediction:", err);
             }
+        }
+
+        // Handle loading model files from browser
+        function loadModelFromFiles() {
+            const uploadModel = document.getElementById('upload-model');
+            const uploadWeights = document.getElementById('upload-weights');
+            const uploadMetadata = document.getElementById('upload-metadata');
+
+            uploadModel.click();  // Trigger file input for model JSON
+
+            uploadModel.onchange = async () => {
+                const modelFile = uploadModel.files[0];
+                const weightsFile = uploadWeights.files[0];
+                const metadataFile = uploadMetadata.files[0];
+
+                if (modelFile && weightsFile && metadataFile) {
+                    try {
+                        // Load model from local files
+                        model = await tmImage.loadFromFiles(modelFile, weightsFile, metadataFile);
+                        maxPredictions = model.getTotalClasses();
+
+                        // Set up the webcam
+                        const width = 200;
+                        const height = 200;
+                        webcam = new tmImage.Webcam(width, height, true);
+                        await webcam.setup(); // Request webcam access
+
+                        document.getElementById('webcam-container').appendChild(webcam.canvas);
+                        webcam.play();
+
+                        labelContainer = document.getElementById('label-container');
+                        for (let i = 0; i < maxPredictions; i++) {
+                            labelContainer.appendChild(document.createElement('div'));
+                        }
+
+                        window.requestAnimationFrame(loop);
+                    } catch (error) {
+                        console.error("Error loading model files:", error);
+                    }
+                }
+            };
+
+            // Trigger the other file inputs for weights and metadata
+            uploadWeights.click();
+            uploadMetadata.click();
         }
     </script>
 </body>
