@@ -13,48 +13,54 @@
     <div id="webcam-container"></div>
     <div id="label-container"></div>
 
-    <script>
-        // Replace the URL below with the raw URLs for model and metadata files
-        const URL = 'https://raw.githubusercontent.com/JorgeTorres15/teachable-machine-model/refs/heads/main/';
-
+    <script type="text/javascript">
         let model, webcam, labelContainer, maxPredictions;
 
         async function init() {
-            const modelURL = URL + 'model.json';
-            const metadataURL = URL + 'metadata.json';
+            const modelURL = 'https://raw.githubusercontent.com/JorgeTorres15/teachable-machine-model/refs/heads/main/model.json';
+            const metadataURL = 'https://raw.githubusercontent.com/JorgeTorres15/teachable-machine-model/refs/heads/main/metadata.json';
 
-            // Load the model and metadata
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
+            try {
+                // Load the model and metadata only
+                model = await tmImage.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
 
-            // Set up the webcam
-            const width = 200;
-            const height = 200;
-            webcam = new tmImage.Webcam(width, height, true);
-            await webcam.setup(); // Request webcam access
+                // Set up the webcam
+                const width = 200;
+                const height = 200;
+                webcam = new tmImage.Webcam(width, height, true);
+                await webcam.setup(); // Request webcam access
 
-            document.getElementById('webcam-container').appendChild(webcam.canvas);
-            webcam.play();
+                document.getElementById('webcam-container').appendChild(webcam.canvas);
+                webcam.play();
 
-            labelContainer = document.getElementById('label-container');
-            for (let i = 0; i < maxPredictions; i++) {
-                labelContainer.appendChild(document.createElement('div'));
+                labelContainer = document.getElementById('label-container');
+                for (let i = 0; i < maxPredictions; i++) {
+                    labelContainer.appendChild(document.createElement('div'));
+                }
+
+                window.requestAnimationFrame(loop);
+            } catch (error) {
+                console.error("Error loading the model:", error);
             }
-
-            window.requestAnimationFrame(loop);
         }
 
         async function loop() {
-            webcam.update(); // Update the webcam frame
-            await predict(); // Make predictions on the current frame
-            window.requestAnimationFrame(loop); // Repeat
+            webcam.update(); // Update webcam frame
+            await predict();
+            window.requestAnimationFrame(loop);
         }
 
         async function predict() {
-            const prediction = await model.predict(webcam.canvas);
-            for (let i = 0; i < maxPredictions; i++) {
-                const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-                labelContainer.childNodes[i].innerHTML = classPrediction;
+            try {
+                // Predict can take in an image, video, or canvas HTML element
+                const prediction = await model.predict(webcam.canvas);
+                for (let i = 0; i < maxPredictions; i++) {
+                    const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
+                    labelContainer.childNodes[i].innerHTML = classPrediction;
+                }
+            } catch (err) {
+                console.error("Error during prediction:", err);
             }
         }
     </script>
