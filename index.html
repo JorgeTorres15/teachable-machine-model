@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&A Market - Innovación en cada compra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header, footer {
+            background-color: #005f73;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            background-color: #0a9396;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background-image: url('hero-background.jpg'); /* Replace with your actual image path */
+            background-size: cover;
+            background-position: center;
+            padding: 50px 20px;
+            text-align: center;
+            color: white; /* Ensures text stands out against the background */
+        }
+        .hero img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #005f73;
+            border-bottom: 2px solid #0a9396;
+            padding-bottom: 5px;
+        }
+        .section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0a9396;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005f73;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <h1>D&A Market</h1>
+        <p>Innovación en cada compra</p>
+    </header>
+
+    <!-- Navegación -->
+    <nav>
+        <a href="about.html">Sobre Nosotros</a>
+        <a href="products.html">Productos</a>
+        <a href="technology.html">Tecnología</a>
+        <a href="#contact">Contáctanos</a>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <!-- Ensure the text is still visible with a high-contrast background -->
+        <h2>La experiencia de compra sin fricciones</h2>
+        <p>Transformamos la forma en que compras con tecnología avanzada y comodidad.</p>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <!-- Sobre nosotros -->
+        <div class="section" id="about">
+            <h2>Sobre Nosotros</h2>
+            <p>D&A Market nació en 2023, fundada por cuatro estudiantes universitarios que decidieron convertir un desafío en una oportunidad. Desde nuestra primera tienda, hemos revolucionado la experiencia de compra al eliminar filas y optimizar cada interacción con el cliente.</p>
+            <p>Nuestro modelo combina tecnología avanzada con una oferta de productos de alta calidad, consolidándonos como un referente de innovación y eficiencia en el sector.</p>
+        </div>
+
+        <!-- Servicios -->
+        <div class="section" id="services">
+            <h2>¿Qué Ofrecemos?</h2>
+            <ul>
+                <li>Venta de alimentos frescos y bebidas.</li>
+                <li>Artículos de conveniencia para el día a día.</li>
+                <li>Productos importados y seleccionados con altos estándares de calidad.</li>
+                <li>Un modelo automatizado que prioriza la comodidad del cliente.</li>
+            </ul>
+        </div>
+
+        <!-- Tecnología -->
+        <div class="section" id="technology">
+            <h2>Nuestra Tecnología</h2>
+            <p>En D&A Market, utilizamos tecnología de punta para ofrecer una experiencia única:</p>
+            <ul>
+                <li><strong>Sensores y escáneres inteligentes:</strong> Eliminan la necesidad de cajas registradoras tradicionales.</li>
+                <li><strong>Reconocimiento avanzado:</strong> Identifica productos y facilita un proceso ágil.</li>
+                <li><strong>Sistemas de pago automatizados:</strong> Garantizan transacciones rápidas y seguras.</li>
+            </ul>
+            <p>Este enfoque no solo optimiza la experiencia del cliente, sino que también nos permite responder rápidamente a las necesidades del mercado.</p>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <div class="section" id="contact">
+            <h2>Contáctanos</h2>
+            <p>Si tienes preguntas, comentarios o simplemente deseas conocernos mejor, ¡escríbenos!</p>
+            <form action="contact.php" method="POST">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Correo:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 D&A Market. Todos los derechos reservados.</p>
+        <p>Síguenos en nuestras redes sociales.</p>
+    </footer>
+</body>
+</html>
